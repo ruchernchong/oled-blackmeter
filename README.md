@@ -1,4 +1,4 @@
-# OLED Black Calculator
+# True Black Calculator
 
 ## Installation
 

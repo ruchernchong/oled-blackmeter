@@ -40,7 +40,7 @@ if __name__ == "__main__":
     if file_path:
         percent_black = calculate_percent_black(file_path)
         image_name = os.path.basename(file_path)
-        messagebox.showinfo("Result", f"Image: {image_name}\nTrue OLED: {percent_black:.2f}%")
+        messagebox.showinfo("Result", f"Image: {image_name}\nTrue Black: {percent_black:.2f}%")
     else:
         print("No file selected")
 
