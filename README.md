@@ -14,4 +14,5 @@ python main.py
 
 ## Example
 
-![](screenshot.png)
+![Interstellar](interstellar.jpeg)
+![True Black Percent](true-black-percent.png)
