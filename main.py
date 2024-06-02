@@ -1,3 +1,4 @@
+import os.path
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
@@ -38,7 +39,8 @@ if __name__ == "__main__":
 
     if file_path:
         percent_black = calculate_percent_black(file_path)
-        messagebox.showinfo("Result", f"True OLED: {percent_black:.2f}%")
+        image_name = os.path.basename(file_path)
+        messagebox.showinfo("Result", f"Image: {image_name}\nTrue OLED: {percent_black:.2f}%")
     else:
         print("No file selected")
 
