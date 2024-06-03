@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image, UnidentifiedImageError
 
 
-def calculate_percent_black(image_path: str) -> int:
+def calculate_percent_black(image_path: str):
     try:
         image = Image.open(image_path)
         image_grayscale = image.convert("L")
