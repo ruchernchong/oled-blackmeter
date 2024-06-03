@@ -29,18 +29,22 @@ if __name__ == "__main__":
 
     file_path = filedialog.askopenfilename(
         title="Select files",
-        filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.tiff *.tif"),
-                   ("PNG files", "*.png"),
-                   ("JPEG files", "*.jpg *.jpeg"),
-                   ("GIF files", "*.gif"),
-                   ("BMP files", "*.bmp"),
-                   ("TIFF files", "*.tiff *.tif")]
+        filetypes=[
+            ("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.tiff *.tif"),
+            ("PNG files", "*.png"),
+            ("JPEG files", "*.jpg *.jpeg"),
+            ("GIF files", "*.gif"),
+            ("BMP files", "*.bmp"),
+            ("TIFF files", "*.tiff *.tif"),
+        ],
     )
 
     if file_path:
         percent_black = calculate_percent_black(file_path)
         image_name = os.path.basename(file_path)
-        messagebox.showinfo("Result", f"Image: {image_name}\nTrue Black: {percent_black:.2f}%")
+        messagebox.showinfo(
+            "Result", f"Image: {image_name}\nTrue Black: {percent_black:.2f}%"
+        )
     else:
         print("No file selected")
 
