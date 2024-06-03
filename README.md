@@ -3,16 +3,17 @@
 ## Installation
 
 ```bash
+# Install the necessary packages
 pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```bash
-python main.py
+# Run the calculator script
+python calculator.py
 ```
 
-## Example
+## True Black Calculator Telegram Bot
 
-![Interstellar](interstellar.jpeg)
-![True Black Percent](true-black-percent.png)
+![True Black Calculator Telegram Bot](iFrameScreenshot.png)
