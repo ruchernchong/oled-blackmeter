@@ -1,47 +1,62 @@
-import os.path
-import tkinter as tk
-from tkinter import filedialog, messagebox
+import os
+import tempfile
 
-import numpy as np
-from PIL import Image, UnidentifiedImageError
+import telegram.constants
+from dotenv import load_dotenv
+from telegram import Update
+from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
+from calculator import calculate_percent_black
 
-def calculate_percent_black(image_path: str) -> int:
-    try:
-        image = Image.open(image_path)
-        image_grayscale = image.convert("L")
-        image_array = np.array(image_grayscale)
-
-        black_pixels = np.sum(image_array == 0)
-        total_pixels = image_array.size
-
-        return black_pixels / total_pixels * 100
-
-    except UnidentifiedImageError:
-        print("The selected file is not a valid image.")
-    except Exception as e:
-        print(f"An error has occurred: {e}")
+load_dotenv()
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.withdraw()
+# Function to handle the /start command
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text('Hello! Welcome to the bot.')
 
-    file_path = filedialog.askopenfilename(
-        title="Select files",
-        filetypes=[("Image files", "*.png *.jpg *.jpeg *.gif *.bmp *.tiff *.tif"),
-                   ("PNG files", "*.png"),
-                   ("JPEG files", "*.jpg *.jpeg"),
-                   ("GIF files", "*.gif"),
-                   ("BMP files", "*.bmp"),
-                   ("TIFF files", "*.tiff *.tif")]
-    )
 
-    if file_path:
-        percent_black = calculate_percent_black(file_path)
-        image_name = os.path.basename(file_path)
-        messagebox.showinfo("Result", f"Image: {image_name}\nTrue Black: {percent_black:.2f}%")
-    else:
-        print("No file selected")
+# Function to handle the /help command
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text('This is a help message.')
 
-    root.destroy()
+
+# Function to handle text messages
+async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(update.message.text)
+
+
+async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        photo_file = await context.bot.get_file(update.message.photo[-1].file_id)
+        file_path = await photo_file.download_to_drive(os.path.join(temp_dir, photo_file.file_path.split('/')[-1]))
+        filename = os.path.basename(file_path)
+
+        true_black_percent = calculate_percent_black(os.path.join(temp_dir, filename))
+
+    reply = await context.bot.send_message(chat_id=update.message.chat_id,
+                                           text=f"True Black: {true_black_percent}%",
+                                           reply_to_message_id=update.message.message_id)
+    if true_black_percent == 100.0:
+        await context.bot.set_message_reaction(chat_id=update.message.chat_id, message_id=reply.message_id,
+                                               reaction=telegram.constants.ReactionEmoji.HUNDRED_POINTS_SYMBOL)
+    await context.bot.set_message_reaction(chat_id=update.message.chat_id, message_id=update.message.message_id,
+                                           reaction=telegram.constants.ReactionEmoji.THUMBS_UP)
+
+
+def main() -> None:
+    token = os.environ.get('TELEGRAM_BOT_TOKEN')
+
+    application = Application.builder().token(token).build()
+
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("help", help_command))
+
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
+    application.add_handler(MessageHandler(filters.PHOTO, photo_handler))
+
+    application.run_polling()
+
+
+if __name__ == '__main__':
+    main()
