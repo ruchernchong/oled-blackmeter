@@ -1,9 +1,9 @@
 import os
 import tempfile
 
-import telegram.constants
 from dotenv import load_dotenv
-from telegram import Update
+from fastapi import FastAPI, Request
+from telegram import Update, Bot
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -15,6 +15,13 @@ from telegram.ext import (
 from calculator import calculate_percent_black
 
 load_dotenv()
+
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+bot = Bot(token=TELEGRAM_BOT_TOKEN)
+
+app = FastAPI()
+
+application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
 
 # Function to handle the /start command
@@ -58,18 +65,14 @@ async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     )
 
 
-def main() -> None:
-    token = os.environ.get("TELEGRAM_BOT_TOKEN")
-
-    application = Application.builder().token(token).build()
-
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("help", help_command))
-
-    application.add_handler(MessageHandler(filters.PHOTO, photo_handler))
-
-    application.run_polling()
+application.add_handler(CommandHandler("start", start))
+application.add_handler(CommandHandler("help", help_command))
+application.add_handler(MessageHandler(filters.PHOTO, photo_handler))
 
 
-if __name__ == "__main__":
-    main()
+@app.post("/webhook")
+async def webhook(request: Request):
+    print("request", request)
+    await application.process_update(Update.de_json(await request.json(), bot))
+
+    return {"status": "ok"}
