@@ -60,7 +60,7 @@ async def photo_handler(update: Update, context):
         filename = os.path.basename(file_path)
 
         true_black_percent = calculate_percent_black(os.path.join(temp_dir, filename))
-        print(f"True Black: {true_black_percent}")
+        print(f"True Black: {true_black_percent:.2f}%")
 
     reply = await context.bot.send_message(
         chat_id=update.message.chat_id,
