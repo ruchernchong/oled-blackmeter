@@ -7,7 +7,6 @@ import tempfile
 import traceback
 
 from dotenv import load_dotenv
-from flask import Flask
 from telegram import Update, Bot, constants
 from telegram.constants import ParseMode
 from telegram.ext import (
@@ -113,9 +112,6 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     )
 
 
-app = Flask(__name__)
-
-
 async def webhook(request):
     if request.method == "POST":
         update = Update.de_json(request.get_json(), bot)
@@ -134,8 +130,3 @@ application.add_error_handler(error_handler)
 
 def main(request):
     return loop.run_until_complete(webhook(request))
-
-
-if __name__ == "__main__":
-    print("RUNNING")
-    app.run(debug=True)

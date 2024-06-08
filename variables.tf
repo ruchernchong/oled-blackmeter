@@ -1,7 +1,7 @@
 variable "environment" {
-  type    = string
-  default = "dev"
+  type = string
 }
+
 
 variable "telegram_bot_token" {
   type = string

@@ -1,8 +1,45 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.opentofu.org/hashicorp/archive" {
+  version     = "2.4.2"
+  constraints = "2.4.2"
+  hashes = [
+    "h1:tZcueUOGqjDRRzW9b6BMwV++XRqABodQjgC/K3bRoXM=",
+    "zh:0fee4f61bc999b5174a1268295e04c91c3f6be0160022cb53943b6ec0a3f1055",
+    "zh:10a895ee751beec68727d3dc6bf8e670f499618bb4b02649544be2c73e89603e",
+    "zh:1118373dfc03cf524273573e3aff9c99e0bb7128ab3ce0be211fd30e3928dfb8",
+    "zh:19c1b4c785f1d864e4fcaec7d96045437494efc333f1e661ea9994cd5c969cdb",
+    "zh:23f0aa399394ce8aa918a6a16ca9f5451d9d5b021e1b08929eb7972f65cb27da",
+    "zh:27d5daeec1819019a4b94c4980c09626e9cf71de3f54128a621fddb1b94b9ece",
+    "zh:56244088a96ff9e3a04b23de0ce2fcfa92c1a5fe6c91c6357cceda4d6d441c17",
+    "zh:578fcb23e8ebde3c5be6c5c67377b5e0c404cc807a74d7087e70c8fb3bb59b92",
+    "zh:9709d108559da5066f24a6d28be661b65a02e908f89b91fe42fc493962a5f466",
+    "zh:ff2a6df5d22bda78ca284756801ba7c86504e4bf0b48b31c8f5af44eefd9d0e8",
+  ]
+}
+
+provider "registry.opentofu.org/hashicorp/google" {
+  version     = "5.32.0"
+  constraints = "5.32.0"
+  hashes = [
+    "h1:kKBIxUKtSOr7QebVvudAejXy3TiGxlW/6wSOU5G7AW4=",
+    "zh:19809f3da85ab470539a2a10832cc1b53d4034f75d2003e0bccb52d0977236ff",
+    "zh:273a130c91cf3b592916b9532048fb366fe37567a6769029fb496bda8540c896",
+    "zh:3f00bdfa1af87df53d6625d1b65fd7ac7f0b6b6e8c210d9dedddb8b08573e1ea",
+    "zh:71acdb468e9a0ec881ea0f9cdaacc204363a0172251b5f3e8ea9a1f7dc5c224f",
+    "zh:76624b4f2a7e7f2733086ab03bbe5166ada4dcc4362beb769e01efd75804c83d",
+    "zh:8f5245561472ff6557905bb8ca991b4deba29a71b28c56d2e29d7f50d428d53f",
+    "zh:96d131d5577071ec7ab1a6453b53084b001e9aa1113b688ef5de3d3b0b624ea3",
+    "zh:98e9bea6418912940aa3767dcb32ffe4cbcbb08d566e52f031f09433f2d2fc47",
+    "zh:ab1fee78c43dc09432542dee28368edb7869e6d4e6688518c566bcec2e7df83a",
+    "zh:eefdd86d3ed1055264f4b144d5ba936192cb10b4abf13624e7bb8996de509353",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/archive" {
-  version = "2.4.2"
+  version     = "2.4.2"
+  constraints = "2.4.2"
   hashes = [
     "h1:1eOz9vM/55vnQjxk23RhnYga7PZq8n2rGxG+2Vx2s6w=",
     "zh:08faed7c9f42d82bc3d406d0d9d4971e2d1c2d34eae268ad211b8aca57b7f758",
@@ -21,7 +58,8 @@ provider "registry.terraform.io/hashicorp/archive" {
 }
 
 provider "registry.terraform.io/hashicorp/google" {
-  version = "5.32.0"
+  version     = "5.32.0"
+  constraints = "5.32.0"
   hashes = [
     "h1:b9ADpbO9Uh2UkcVW08lG8XzqfXNYFx5Sxsw6+70RiNo=",
     "zh:0cde8353183f6c700be6c50e5d41e7950aa081a542747cb7415c262c1e2665b6",
