@@ -1,3 +1,19 @@
+terraform {
+  required_providers {
+    archive = {
+      source  = "hashicorp/archive"
+      version = "2.4.2"
+    }
+    google = {
+      source  = "hashicorp/google"
+      version = "5.32.0"
+    }
+  }
+
+  required_version = "1.8.4"
+}
+
+
 provider "google" {
   project = "true-black-calculator-service"
   region  = "asia-southeast1"
