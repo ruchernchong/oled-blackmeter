@@ -21,11 +21,34 @@ asyncio.set_event_loop(loop)
 
 
 async def start(update: Update, context):
-    await update.message.reply_text("Hello! Welcome to the bot.")
+    user_first_name = update.effective_user.first_name
+    welcome_message = (
+        f"👋 Hey there, {user_first_name}!\n\n"
+        "Welcome!\n\n"
+        "Ready for some fun? 🎉 Just upload a photo, and I'll tell you exactly how many pure black pixels (#000000) are hiding in it. It's that simple and cool!\n\n"
+        "Go ahead, give it a try! 📸\n\n"
+        "If you need any help, just type /help.\n\n"
+        "Let's get started and uncover those hidden black pixels together! 🖤"
+    )
+
+    await update.message.reply_text(welcome_message)
 
 
 async def help_command(update: Update, context):
-    await update.message.reply_text("This is a help message.")
+    help_message = (
+        "👋 Need some help? No problem!\n\n"
+        "Here’s how you can make the most of [Bot's Name]:\n\n"
+        "📸 **Upload a Photo**: Simply upload any photo, and I'll count how many pure black pixels (#000000) are in it.\n\n"
+        "🔍 **Main Commands**:\n"
+        "- **/start**: Start the bot and get a welcome message.\n"
+        "- **/help**: Show this help message.\n"
+        # "- **/support**: Get in touch with our support team if you have any questions or need further assistance.\n\n"
+        "Feel free to upload a photo anytime and let’s discover those black pixels together! 🖤\n\n"
+        # "If you need more help, just type /support.\n\n"
+        "Happy exploring!"
+    )
+
+    await update.message.reply_text(help_message)
 
 
 async def photo_handler(update: Update, context):
@@ -37,7 +60,7 @@ async def photo_handler(update: Update, context):
         filename = os.path.basename(file_path)
 
         true_black_percent = calculate_percent_black(os.path.join(temp_dir, filename))
-        print(f"True Black: {true_black_percent}")
+        print(f"True Black: {true_black_percent:.2f}%")
 
     reply = await context.bot.send_message(
         chat_id=update.message.chat_id,
