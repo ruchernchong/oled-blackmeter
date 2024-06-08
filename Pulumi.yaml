@@ -1,0 +1,7 @@
+name: true-black-calculator
+runtime: python
+config:
+  google:project:
+    value: true-black-calculator-service
+  google:region:
+    value: asia-southeast1
