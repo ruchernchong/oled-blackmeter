@@ -16,4 +16,5 @@ python calculator.py
 
 ## True Black Calculator Telegram Bot
 
-![True Black Calculator Telegram Bot](iFrameScreenshot.png)
+![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot1.PNG)
+![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot2.PNG)
