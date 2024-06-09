@@ -26,14 +26,6 @@ def create_zip(files_to_zip):
 
 zip_path = create_zip(["main.py", "calculator.py", "requirements.txt"])
 
-asset_archive = pulumi.AssetArchive(
-    {
-        "main.py": pulumi.FileAsset("main.py"),
-        "calculator.py": pulumi.FileAsset("calculator.py"),
-        "requirements.txt": pulumi.FileAsset("requirements.txt"),
-    }
-)
-
 bucket = gcp.storage.Bucket("bucket", name=f"{PROJECT_NAME}-bucket", location="ASIA")
 
 archive = gcp.storage.BucketObject(
