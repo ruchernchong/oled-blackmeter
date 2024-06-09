@@ -62,7 +62,7 @@ async def photo_handler(update: Update, context):
         true_black_percent = calculate_percent_black(os.path.join(temp_dir, filename))
         print(f"True Black: {true_black_percent:.2f}%")
 
-    reply = await context.bot.send_message(
+    reply = await context.bot.reply_text(
         chat_id=update.message.chat_id,
         text=f"True Black: {true_black_percent:.2f}%",
         reply_to_message_id=update.message.message_id,
@@ -82,6 +82,13 @@ async def photo_handler(update: Update, context):
     )
 
 
+async def video_handler(update: Update, context):
+    await update.message.reply_text(
+        text="I know videos 🎥 are cool, but I can only handle images 🖼️. Share a photo with me instead!",
+        reply_to_message_id=update.message.id,
+    )
+
+
 async def webhook(request):
     if request.method == "POST":
         update = Update.de_json(request.get_json(), bot)
@@ -95,6 +102,7 @@ async def webhook(request):
 application.add_handler(CommandHandler("start", start))
 application.add_handler(CommandHandler("help", help_command))
 application.add_handler(MessageHandler(filters.PHOTO, photo_handler))
+application.add_handler(MessageHandler(filters.VIDEO, video_handler))
 
 
 def main(request):
