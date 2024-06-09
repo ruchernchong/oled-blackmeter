@@ -47,4 +47,4 @@ def main():
 if __name__ == "__main__":
     asyncio.run(set_webhook())
     # start_ngrok()
-    app.run(debug=True)
+    app.run()
