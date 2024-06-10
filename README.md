@@ -1,5 +1,7 @@
 # True Black Calculator
 
+Link to the Telegram Bot: https://t.me/TrueBlackCalculatorBot
+
 ## Installation
 
 ```bash
@@ -7,9 +9,8 @@
 pip install -r requirements.txt
 ```
 
-## Usage
+## Run in Local Deveopment
 
-### Run in local development
 ```bash
 # Setup ngrok
 ngrok http 5000 # Flask uses port 5000 by default. You can change this accordingly to your preference
@@ -27,9 +28,27 @@ TELEGRAM_BOT_TOKEN=
 python server.py
 ```
 
-Once the above is completed, head over to your Telegram Bot that was setup with Telegram BotFather and you are done.
+Once the above is completed, head over to your Telegram Bot that was setup with [@BotFather](https://t.me/BotFather) and
+you are done.
 
-## True Black Calculator Telegram Bot
+## Deploy to Google Cloud Functions
+
+By default, this Telegram bot is already properly setup and you may follow the commands below to deploy to Google Cloud
+Functions.
+
+```bash
+# Setup a Pulumi Stack (You will need a Pulumi account first)
+pulumi stack init
+
+# Update the stack
+pulumi up
+```
+
+However, if you have intention to use other methods of deployment, you are feel free to do so.
+
+*Do note that the current setup is running in webhook mode rather than polling mode.
+
+## Screenshots
 
 ![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot1.PNG)
 ![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot2.PNG)
