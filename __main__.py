@@ -10,35 +10,26 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PROJECT_NAME = f"{pulumi.get_project()}-{pulumi.get_stack()}"
-
-# Generate a timestamp for versioning
 TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-
-config = pulumi.Config()
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 
 def create_zip(files_to_zip):
-    temp_dir = tempfile.TemporaryDirectory().name
-    os.makedirs(temp_dir)
-    zip_file = os.path.join(temp_dir, "function.zip")
-    with zipfile.ZipFile(zip_file, "w") as zipf:
-        for file in files_to_zip:
-            zipf.write(file, os.path.basename(file))
-    return zip_file
+    with tempfile.TemporaryDirectory() as temp_dir:
+        zip_file = os.path.join(temp_dir, "function.zip")
+        with zipfile.ZipFile(zip_file, "w") as zipf:
+            for file in files_to_zip:
+                zipf.write(file, os.path.basename(file))
+        return zip_file
 
 
 zip_path = create_zip(["main.py", "calculator.py", "requirements.txt"])
-
-bucket = gcp.storage.Bucket("bucket", name=f"{PROJECT_NAME}-bucket", location="ASIA")
-
-# Create a more descriptive archive name
 archive_name = f"{PROJECT_NAME}-function-{TIMESTAMP}.zip"
 
+bucket = gcp.storage.Bucket("bucket", name=f"{PROJECT_NAME}-bucket", location="ASIA")
 archive = gcp.storage.BucketObject(
     "archive", bucket=bucket.name, name=archive_name, source=pulumi.FileAsset(zip_path)
 )
-
 
 function = gcp.cloudfunctionsv2.Function(
     "function",
@@ -67,7 +58,7 @@ function = gcp.cloudfunctionsv2.Function(
     ),
 )
 
-function_invoker = gcp.cloudfunctionsv2.FunctionIamMember(
+gcp.cloudfunctionsv2.FunctionIamMember(
     "function-invoker",
     project=function.project,
     location=function.location,
@@ -76,7 +67,7 @@ function_invoker = gcp.cloudfunctionsv2.FunctionIamMember(
     member="allUsers",
 )
 
-cloudrun_invoker = gcp.cloudrun.IamMember(
+gcp.cloudrun.IamMember(
     "cloudrun-invoker",
     location=function.location,
     project=function.project,
