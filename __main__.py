@@ -36,7 +36,7 @@ function = gcp.cloudfunctions.Function(
     "function",
     name=f"{PROJECT_NAME}-function",
     region="asia-southeast1",
-    description="Telegram Bot for calculating true black percentage from images",
+    description="Telegram Bot for calculating the OLED black pixels percentage from images",
     runtime="python312",
     available_memory_mb=256,
     source_archive_bucket=bucket.name,

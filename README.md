@@ -1,6 +1,6 @@
-# True Black Calculator
+# OLED BlackMeter
 
-Link to the Telegram Bot: https://t.me/TrueBlackCalculatorBot
+Link to the Telegram Bot: https://t.me/OLEDBlackMeterBot
 
 ## Installation
 
@@ -9,7 +9,7 @@ Link to the Telegram Bot: https://t.me/TrueBlackCalculatorBot
 pip install -r requirements.txt
 ```
 
-## Run in Local Deveopment
+## Run in Local Development
 
 ```bash
 # Setup ngrok
@@ -50,5 +50,5 @@ However, if you have intention to use other methods of deployment, you are feel 
 
 ## Screenshots
 
-![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot1.PNG)
-![True Black Calculator Telegram Bot](screenshots/iFrameScreenshot2.PNG)
+![OLED BlackMeter Telegram Bot](screenshots/iFrameScreenshot1.PNG)
+![OLED BlackMeter Telegram Bot](screenshots/iFrameScreenshot2.PNG)
