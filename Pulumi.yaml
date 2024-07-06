@@ -1,7 +1,7 @@
-name: true-black-calculator
+name: oled-blackmeter
 runtime: python
 config:
   google:project:
-    value: true-black-calculator-service
+    value: oled-blackmeter
   google:region:
     value: asia-southeast1
