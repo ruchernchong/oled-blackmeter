@@ -1,3 +1,4 @@
+import datetime
 import os
 import tempfile
 import zipfile
@@ -8,7 +9,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PROJECT_NAME = f"{pulumi.get_stack()}-{pulumi.get_project()}"
+PROJECT_NAME = f"{pulumi.get_project()}-{pulumi.get_stack()}"
+
+# Generate a timestamp for versioning
+TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
 config = pulumi.Config()
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -28,8 +32,11 @@ zip_path = create_zip(["main.py", "calculator.py", "requirements.txt"])
 
 bucket = gcp.storage.Bucket("bucket", name=f"{PROJECT_NAME}-bucket", location="ASIA")
 
+# Create a more descriptive archive name
+archive_name = f"{PROJECT_NAME}-function-{TIMESTAMP}.zip"
+
 archive = gcp.storage.BucketObject(
-    "archive", bucket=bucket.name, source=pulumi.FileAsset(zip_path)
+    "archive", bucket=bucket.name, name=archive_name, source=pulumi.FileAsset(zip_path)
 )
 
 
