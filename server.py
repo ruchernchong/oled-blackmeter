@@ -5,6 +5,7 @@ import time
 
 from dotenv import load_dotenv
 from flask import Flask, request
+from flask_wtf.csrf import CSRFProtect
 from telegram import Bot
 
 from main import webhook
@@ -17,6 +18,7 @@ asyncio.set_event_loop(loop)
 NGROK_STATIC_DOMAIN = os.getenv("NGROK_STATIC_DOMAIN")
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 
 def start_ngrok():
