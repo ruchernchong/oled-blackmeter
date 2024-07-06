@@ -15,12 +15,13 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 
 def create_zip(files_to_zip):
-    with tempfile.TemporaryDirectory() as temp_dir:
-        zip_file = os.path.join(temp_dir, "function.zip")
-        with zipfile.ZipFile(zip_file, "w") as zipf:
-            for file in files_to_zip:
-                zipf.write(file, os.path.basename(file))
-        return zip_file
+    temp_dir = tempfile.TemporaryDirectory().name
+    os.makedirs(temp_dir)
+    zip_file = os.path.join(temp_dir, "function.zip")
+    with zipfile.ZipFile(zip_file, "w") as zipf:
+        for file in files_to_zip:
+            zipf.write(file, os.path.basename(file))
+    return zip_file
 
 
 zip_path = create_zip(["main.py", "calculator.py", "requirements.txt"])
