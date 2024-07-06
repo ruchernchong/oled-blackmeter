@@ -67,7 +67,9 @@ async def photo_handler(update: Update, context):
         reply_to_message_id=update.message.message_id,
     )
 
-    if true_black_percent == 100.0:
+    EPSILON = 1e-9
+
+    if abs(true_black_percent - 100.0) < EPSILON:
         await context.bot.set_message_reaction(
             chat_id=update.message.chat_id,
             message_id=reply.message_id,
