@@ -80,4 +80,4 @@ cloudrun_invoker = gcp.cloudrun.IamMember(
 
 
 pulumi.export("bucket_object_name", archive.output_name)
-pulumi.export("function_url", function.service_config.uri)
+pulumi.export("function_url", function.url)
