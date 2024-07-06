@@ -35,7 +35,7 @@ archive = gcp.storage.BucketObject(
 
 function = gcp.cloudfunctionsv2.Function(
     "function",
-    name=f"{PROJECT_NAME}-function-v2",
+    name=f"{PROJECT_NAME}-function",
     location="asia-southeast1",
     description="Telegram Bot for calculating the OLED black pixels percentage from images",
     build_config=gcp.cloudfunctionsv2.FunctionBuildConfigArgs(
