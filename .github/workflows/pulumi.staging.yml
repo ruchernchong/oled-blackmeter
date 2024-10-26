@@ -1,8 +1,5 @@
 name: Pulumi Staging Workflow
-on:
-  push:
-    branches:
-      - "*"
+on: [push]
 
 concurrency:
   group: merge-${{ github.ref }}
