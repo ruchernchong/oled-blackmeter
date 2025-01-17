@@ -15,19 +15,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.5.20"
+          enable-cache: true
+      - name: Install the project
+        run: uv sync
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.12
-          cache: 'pip'
-
-      - run: pip install -r requirements.txt
-
       - uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
       - uses: pulumi/actions@v5
         with:
           command: up
