@@ -1,5 +1,9 @@
 name: oled-blackmeter
-runtime: python
+runtime:
+  name: python
+  options:
+    toolchain: uv
+    virtualenv: .venv
 config:
   google:project:
     value: oled-blackmeter
