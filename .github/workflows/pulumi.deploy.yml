@@ -18,7 +18,7 @@ on:
         required: true
 
 jobs:
-  deploy:
+  pulumi:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
@@ -30,7 +30,10 @@ jobs:
           version: "0.5.20"
           enable-cache: true
       - name: Install the project
-        run: uv sync
+        run: |
+          uv venv
+          uv pip install -r requirements.txt
+          uv sync
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
