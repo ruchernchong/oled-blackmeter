@@ -1,0 +1,21 @@
+{
+  "name": "oled-blackmeter",
+  "version": "0.1.0",
+  "description": "Telegram Bot for calculating the OLED black pixels percentage from images ",
+  "scripts": {
+    "dev": "sst dev --stage dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ru Chern Chong <hello@ruchern.dev>",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@biomejs/biome"]
+  },
+  "dependencies": {
+    "sst": "3.7.15"
+  }
+}

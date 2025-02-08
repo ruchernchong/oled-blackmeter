@@ -106,5 +106,5 @@ application.add_handler(MessageHandler(filters.PHOTO, photo_handler))
 application.add_handler(MessageHandler(filters.VIDEO, video_handler))
 
 
-def main(request):
-    return loop.run_until_complete(webhook(request))
+def handler(event):
+    return asyncio.run(webhook(event))
