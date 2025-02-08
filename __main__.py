@@ -24,7 +24,7 @@ def create_zip(files_to_zip):
     return zip_file
 
 
-zip_path = create_zip(["main.py", "calculator.py", "requirements.txt"])
+zip_path = create_zip(["main.py", "calculator.py"])
 archive_name = f"{PROJECT_NAME}-function-{TIMESTAMP}.zip"
 
 bucket = gcp.storage.Bucket("bucket", name=f"{PROJECT_NAME}-bucket", location="ASIA")
