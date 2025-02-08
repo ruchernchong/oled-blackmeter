@@ -1,0 +1,22 @@
+{
+  "name": "oled-blackmeter",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "dev": "sst dev --stage dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ru Chern Chong <hello@ruchern.dev>",
+  "license": "ISC",
+  "dependencies": {
+    "sst": "3.7.15"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/aws-lambda": "8.10.147",
+    "prettier": "^3.4.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@biomejs/biome"]
+  }
+}
