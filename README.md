@@ -2,11 +2,16 @@
 
 Link to the Telegram Bot: https://t.me/OLEDBlackMeterBot
 
+## Prerequisites
+- Python >= 3.12
+- [ngrok](https://ngrok.com/download)
+- Telegram Bot API token from [BotFather](https://t.me/BotFather)
+
 ## Installation
 
 ```bash
 # Install the necessary packages
-pip install -r requirements.txt
+uv sync
 ```
 
 ## Run in Local Development
@@ -25,7 +30,7 @@ NGROK_STATIC_DOMAIN=2655-158-140-141-125.ngrok-free.app # Example
 TELEGRAM_BOT_TOKEN=
 
 # Run the server.py
-python server.py
+uv run server.py
 ```
 
 Once the above is completed, head over to your Telegram Bot that was setup with [@BotFather](https://t.me/BotFather) and
