@@ -39,10 +39,10 @@ jobs:
       - uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-      - uses: pulumi/actions@v5
-        with:
-          command: up
-          stack-name: ${{ inputs.stack-name }}
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      # - uses: pulumi/actions@v5
+      #   with:
+      #     command: up
+      #     stack-name: ${{ inputs.stack-name }}
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
